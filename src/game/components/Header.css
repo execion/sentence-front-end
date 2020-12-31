@@ -1,0 +1,13 @@
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header {
+    height: 8rem;
+    background-color: rgba(10,10,10,.9);
+}
+.header h1 {
+    color: rgba(240,240,240,.9);
+    margin: 0;
+}
