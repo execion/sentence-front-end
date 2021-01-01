@@ -1,0 +1,6 @@
+export const typeGame = {
+    INSERT_SENTENCES : "INSERT_SENTENCES",
+    NEXT_SENTENCES: "NEXT_SENTENCES",
+    ANSWER: "ANSWER",
+    QUESTION: "QUESTION"
+}

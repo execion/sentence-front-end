@@ -1,5 +1,5 @@
 import React from 'react'
-import './Counter.css';
+import './css/Counter.css';
 
 const Counter = ({countCorrect, countIncorrect, count}) => {
     return (

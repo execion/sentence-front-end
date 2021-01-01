@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import './AudioButton.css';
+import './css/AudioButton.css';
 const AudioButton = ({id}) => {
     const [ audioPlay, setAudioPlay ] = useState(true);
     const [ audioPlayer, setAudioPlayer ] = useState(new Audio(`http://localhost:8000/api/audio/${id}`));

@@ -1,4 +1,4 @@
-import { typesGame } from "./actions";
+import { typeGame } from "./actions";
 import { v4 as uuidv4 } from "uuid";
 import { shuffle } from "shufflr";
 /* --------------------------------------------------   State   -------------------------------------------------- */
@@ -18,11 +18,11 @@ const defaultState = {
 
 export const gameReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case typesGame.INSERT_SENTENCES:
+        case typeGame.INSERT_SENTENCES:
             return createSentenceList(state, action);
-        case typesGame.QUESTION:
+        case typeGame.QUESTION:
             return questionLetters(state, action.payload);
-        case typesGame.ANSWER:
+        case typeGame.ANSWER:
             return answerLetters(state, action.payload);
         default:
             return state;

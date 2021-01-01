@@ -1,4 +1,4 @@
-import { types } from "./actions"
+import { typeSentence } from "./actions"
 
 const defaultState = {
     loading: false,
@@ -7,9 +7,9 @@ const defaultState = {
 
 export default function sentenceReducer(state = defaultState, action ) {
     switch(action.type) {
-        case types.SET_SENTENCES:
+        case typeSentence.SET_SENTENCES:
             return { ...state, loading: true};
-        case types.GET_SENTENCES:
+        case typeSentence.GET_SENTENCES:
             return { ...state, loading: false, sentences: action.payload };
         default: return state;
     }

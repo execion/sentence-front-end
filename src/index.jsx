@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GameLayout from './game/GameLayout';
+import App from './app';
+
 ReactDOM.render(
   <React.StrictMode>
-    <GameLayout />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
