@@ -33,17 +33,18 @@ export const gameReducer = (state = defaultState, action) => {
 
 function createSentenceList(state, action) {
     //Pasa la oración recibida a una lista en el state.
-    const tempSentence = action.payload.split(" ");
+    let tempSentence = action.payload.split(" ");
     let tempList = [];
-
+    tempSentence = shuffle(tempSentence);
+    
     for (let i of tempSentence) {
         tempList.push({
             id: uuidv4(),
             letter: i,
         });
     }
-
-    tempList = shuffle(tempList); //Desordena la lista
+    
+    tempList = shuffle(tempList);
 
     return {
         ...state,
