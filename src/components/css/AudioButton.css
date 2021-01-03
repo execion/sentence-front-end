@@ -1,8 +1,15 @@
 .button-game {
     display: inline-block;
-    width: 3rem;
-    height: 3rem;
-    border-radius: 1.8rem;
+    width: 6rem;
+    height: 2.5rem;
+    border-radius: .4rem;
     border: .1rem solid rgba(40,40,40,1);
-    margin-top: 1rem;
+    margin: 1rem 0;
+    font-size: 1.7rem;
+    font-weight: bolder;
+}
+.button-game:hover {
+    border: none;
+    background-color: rgba(40,40,40,1);
+    color: rgba(240, 240, 240, .9);
 }
