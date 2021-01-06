@@ -1,22 +1,10 @@
 import { typeGame } from "./actions";
 import { v4 as uuidv4 } from "uuid";
 import { shuffle } from "shufflr";
-/* --------------------------------------------------   State   -------------------------------------------------- */
-
-const defaultState = {
-    loaded: false,
-    index: 0,
-    question: [],
-    answer: [],
-    answerCorrect: "",
-    countCorrect: 0,
-    countIncorrect: 0,
-    count: 0
-};
 
 /* --------------------------------------------------   Reducer   -------------------------------------------------- */
 
-export const gameReducer = (state = defaultState, action) => {
+export const gameReducer = (state, action) => {
     switch (action.type) {
         case typeGame.INSERT_SENTENCES:
             return createSentenceList(state, action);

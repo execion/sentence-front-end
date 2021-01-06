@@ -1,34 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
 import { connect } from "react-redux";
 import { typeGame } from "./actions";
 import AudioButton from "./AudioButton";
 import ButtonList from "./ButtonList";
 import Counter from "./Counter";
 import './css/Game.css';
+import { gameReducer } from "./gameReducer";
+import { defaultState } from "./state";
+import { insertSentence, stateToCounter, sentenceId } from './helper';
 
-const Game = ({game, sentence, counter, insertSentence, alternateLetter}) => {
-    useEffect(() => {
-        if (sentence.init) {
-            //Si el fetch en sentenceReducer está completo
-            insertSentence(sentence.sentences[game.index % sentence.sentences.length].sentence); //Carga la oración en gameState   
-            console.log(sentence.sentences[game.index % sentence.sentences.length].sentence);
+const Game = ({sentence}) => {
+    const [state, dispatch] = useReducer(gameReducer, defaultState);
+
+    const alternateLetter = (id, type) => dispatch(
+        {
+            type: type,
+            payload: id,
         }
-        // eslint-disable-next-line
-    }, [game.index, sentence.init]);
+    );
 
-    if (game.loaded) {
-        //Si la oración esta cargada en gameState, comienza.
+    useEffect(() => {
+        insertSentence(sentence, state, dispatch); //Carga la oración en el state
+        // eslint-disable-next-line
+    }, [state.index, sentence.init]);
+
+    if (state.loaded) {
+        //Si la oración esta cargada en el state, comienza.
         return (
             <div className="container">  
-                <Counter count={counter.count} countCorrect={counter.countCorrect} countIncorrect={counter.countIncorrect} />
-                <AudioButton id={sentence.sentences[game.index % sentence.sentences.length].id}/>
+                <Counter count={stateToCounter(state)} />
+                <AudioButton id={sentenceId(sentence, state)}/>
 
                 <div className="answer">
-                    <ButtonList WordList={game.answer} AlternateLetter={alternateLetter} Types={typeGame.ANSWER}/>
+                    <ButtonList WordList={state.answer} AlternateLetter={alternateLetter} Types={typeGame.ANSWER}/>
                 </div>
 
                 <div className="question">
-                    <ButtonList WordList={game.question} AlternateLetter={alternateLetter} Types={typeGame.QUESTION}/>
+                    <ButtonList WordList={state.question} AlternateLetter={alternateLetter} Types={typeGame.QUESTION}/>
                 </div>
             </div>
         );
@@ -37,19 +45,8 @@ const Game = ({game, sentence, counter, insertSentence, alternateLetter}) => {
     }
 };
 
-const mapStateToProps = ( { gameState, sentenceState }) => {
+const mapStateToProps = ( { sentenceState } ) => {
     return {
-        game: {
-            question: gameState.question,
-            answer: gameState.answer,
-            loaded: gameState.loaded,
-            index: gameState.index,
-        },
-        counter: {
-            countCorrect: gameState.countCorrect,
-            countIncorrect: gameState.countIncorrect,
-            count: gameState.count
-        },
         sentence: {
             sentences: sentenceState.sentences,
             init: !sentenceState.loading,
@@ -57,19 +54,4 @@ const mapStateToProps = ( { gameState, sentenceState }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        insertSentence: (sentence) =>
-            dispatch({
-                type: typeGame.INSERT_SENTENCES,
-                payload: sentence,
-            }),
-        alternateLetter: (id, type) =>
-            dispatch({
-                type: type,
-                payload: id,
-            }),
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, undefined)(Game);

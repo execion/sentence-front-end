@@ -1,12 +1,12 @@
 import React from 'react'
 import './css/Counter.css';
 
-const Counter = ({countCorrect, countIncorrect, count}) => {
+const Counter = ({count}) => {
     return (
         <div className="counter">
-            <p>Correct: {countCorrect}</p>
-            <p>Incorrect: {countIncorrect}</p>
-            <p>Count: {count}</p>
+            <p>Correct: {count.correct}</p>
+            <p>Incorrect: {count.incorrect}</p>
+            <p>Count: {count.count}</p>
         </div>
     );
 }
