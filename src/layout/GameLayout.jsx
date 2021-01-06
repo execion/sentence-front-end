@@ -1,6 +1,6 @@
 import React from 'react';
-import Game from '../components/Game';
-import Header from '../components/Header';
+import Game from '../game/Game';
+import Header from '../header/Header';
 
 const GameLayout = () => {
   return (

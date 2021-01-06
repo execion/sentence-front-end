@@ -1,30 +1,31 @@
-import React from 'react'
-import thunk from 'redux-thunk';
-import GameLayout from './layout/GameLayout'
-import { applyMiddleware, combineReducers, createStore } from 'redux';
-import sentenceReducer from './sentence/sentenceReducer';
-import { getSentences } from './sentence/actions';
-import { Provider } from 'react-redux';
-import { gameReducer } from './game/gameReducer';
+import React from 'react';
+import GameLayout from './layout/GameLayout';
+import { Route, Switch } from 'react-router-dom';
+import LoginLayout from './layout/LoginLayout';
+import { connect } from 'react-redux';
 
-const middleware = [thunk];
-
-const store = createStore(
-    combineReducers({
-        sentenceState: sentenceReducer,
-        gameState: gameReducer
-    }),
-    applyMiddleware(...middleware)
-);
-
-store.dispatch(getSentences());
-
-const App = () => {
-    return (
-        <Provider store={store}>
-            <GameLayout />
-        </Provider>
-    );
+const App = ({havePassport}) => {
+    if(!havePassport) {
+        return(
+            <Switch>
+                    <Route exact path="/" component={LoginLayout} />
+            </Switch>
+        )
+    } else {
+        return (
+            <>
+                <Switch>
+                    <Route exact path="/" component={GameLayout} />
+                </Switch>
+            </>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = ({loginState}) => {
+    return {
+        havePassport: loginState.loading,
+    }
+}
+
+export default connect(mapStateToProps)(App);

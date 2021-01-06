@@ -5,7 +5,7 @@ const defaultState = {
     sentences: [],
 }
 
-export default function sentenceReducer(state = defaultState, action ) {
+export const sentenceReducer = (state = defaultState, action ) => {
     switch(action.type) {
         case typeSentence.SET_SENTENCES:
             return { ...state, loading: true};
@@ -13,4 +13,4 @@ export default function sentenceReducer(state = defaultState, action ) {
             return { ...state, loading: false, sentences: action.payload };
         default: return state;
     }
-}
+};

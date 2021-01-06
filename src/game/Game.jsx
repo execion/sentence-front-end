@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { typeGame } from "../game/actions";
+import { typeGame } from "./actions";
 import AudioButton from "./AudioButton";
 import ButtonList from "./ButtonList";
 import Counter from "./Counter";
