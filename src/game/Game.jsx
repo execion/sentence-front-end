@@ -9,7 +9,7 @@ import { gameReducer } from "./gameReducer";
 import { defaultState } from "./state";
 import { insertSentence, stateToCounter, sentenceId } from './helper';
 
-const Game = ({sentence}) => {
+const Game = ({sentences}) => {
     const [state, dispatch] = useReducer(gameReducer, defaultState);
 
     const alternateLetter = (id, type) => dispatch(
@@ -20,16 +20,16 @@ const Game = ({sentence}) => {
     );
 
     useEffect(() => {
-        insertSentence(sentence, state, dispatch); //Carga la oración en el state
+        insertSentence(sentences, state, dispatch); //Carga la oración en el state
         // eslint-disable-next-line
-    }, [state.index, sentence.init]);
+    }, [state.index]);
 
     if (state.loaded) {
         //Si la oración esta cargada en el state, comienza.
         return (
             <div className="container">  
                 <Counter count={stateToCounter(state)} />
-                <AudioButton id={sentenceId(sentence, state)}/>
+                <AudioButton id={sentenceId(sentences, state)}/>
 
                 <div className="answer">
                     <ButtonList WordList={state.answer} AlternateLetter={alternateLetter} Types={typeGame.ANSWER}/>
@@ -47,10 +47,8 @@ const Game = ({sentence}) => {
 
 const mapStateToProps = ( { sentenceState } ) => {
     return {
-        sentence: {
-            sentences: sentenceState.sentences,
-            init: !sentenceState.loading,
-        }
+        sentences: sentenceState.sentences,
+        init: !sentenceState.loading   
     };
 };
 

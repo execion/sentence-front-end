@@ -4,12 +4,12 @@ import './css/Login.css';
 import {getPassport} from './actions';
 import { useForm } from 'react-hook-form';
 
-const Login = ({dispatch}) => {
+const Login = ({getPassport}) => {
 
     const {register, handleSubmit} = useForm();
 
     const onSubmit = (data) => {
-        dispatch(getPassport(data.username, data.password));
+        getPassport(data.username, data.password);
     }
 
     return (
@@ -24,10 +24,4 @@ const Login = ({dispatch}) => {
 }
 
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatch: dispatch
-    }
-}
-
-export default connect(undefined, mapDispatchToProps)(Login);
+export default connect(undefined, {getPassport})(Login);

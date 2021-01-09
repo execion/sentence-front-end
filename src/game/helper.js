@@ -1,16 +1,15 @@
 import { typeGame } from "./actions";
 
-export const insertSentence = (sentence, state, dispatch) => { 
-    if (sentence.init) {
-        let payload = sentence.sentences[state.index % sentence.sentences.length].sentence;
-        console.log(payload);
+export const insertSentence = (sentence, state, dispatch) => {   
+    if(sentence.length > 0) {
+        let payload = sentence[state.index % sentence.length].sentence;
         return dispatch(
             {
                 type: typeGame.INSERT_SENTENCES,
                 payload: payload,
             }
         )
-    }
+    }  
 };
 
 export const stateToCounter = (state) => {
@@ -22,5 +21,5 @@ export const stateToCounter = (state) => {
 }
 
 export const sentenceId = (sentence, state) => {
-    return sentence.sentences[state.index % sentence.sentences.length].id;
+    return sentence[state.index % sentence.length].id;
 }

@@ -1,5 +1,4 @@
 import { shuffle } from "shufflr";
-import { typeLogin } from '../login/actions';
 
 export const typeSentence = {
     SET_SENTENCES : "SET_SENTENCES",
@@ -17,7 +16,7 @@ export const getSentences = () => async ( dispatch ) => {
     const getPassport = {
         passport: localStorage.getItem("passport")
     }
-    console.log(getPassport);
+    
     const response = await fetch("http://localhost:8000/api/sentences", {
         method: "POST",
         headers: {
@@ -27,11 +26,7 @@ export const getSentences = () => async ( dispatch ) => {
     });
     const data = await response.json();
 
-    console.log(data);
-
-    if(typeof(data) === 'boolean') {
-        dispatch({type: typeLogin.SET_PASSPORT, payload: data});
-    } else {
+    if(typeof(data) === "object") {
         dispatch({ type: typeSentence.GET_SENTENCES, payload: shuffle(data)});
     }
 };
