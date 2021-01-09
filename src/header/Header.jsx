@@ -4,7 +4,14 @@ import './css/Header.css';
 const Header = () => {
     return (
         <header className="header">
-            <h1>ENGSyS</h1>
+            <div className="logo">
+                <img src="./img/logo.png" alt="logo"/>
+            </div>
+
+            <div className="nav">
+                <button className="button-signup">Sign-up</button>
+                <button className="button-login">Login</button>
+            </div>
         </header>
     );
 }

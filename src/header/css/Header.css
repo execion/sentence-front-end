@@ -1,20 +1,38 @@
 .header {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
 }
 .header {
-    height: 8rem;
-    background-image: linear-gradient(
-        0deg,
-        rgba(120,120,120,.9), 
-        rgba(130,130,130,.9), 
-        rgba(140,140,140,.9)
-    );
+    box-shadow: 15px 4px 15px rgba(37, 89, 167, 0.699);
 }
-.header h1 {
-    color: rgba(60,60,60,.9);
-    font-size: 2.4rem;
-    margin: 0;
-    text-shadow: 3px 3px 1px rgba(180,180,180,.8);
+.logo {
+    display: flex;
+    justify-content: center;
+    grid-column: 2;
+}
+.logo img {
+    width: 24rem;
+    height: 6.5rem;
+}
+
+.header .nav {
+    grid-column: 3;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.nav .button-signup {
+    margin-right: 1.5rem;
+}
+.button-signup, .button-login {
+    display: inline-block;
+    width: 8rem;
+    height: 3rem;
+    border: 1px solid rgba(19, 93, 212, 0.836);
+    color:  rgba(19, 93, 212, 0.836);
+    border-radius: .5rem;
 }
