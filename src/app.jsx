@@ -3,12 +3,14 @@ import GameLayout from './layout/GameLayout';
 import { Route, Switch } from 'react-router-dom';
 import LoginLayout from './layout/LoginLayout';
 import { connect } from 'react-redux';
+import SignUpLayout from './layout/SignUpLayout';
 
 const App = ({havePassport}) => {
     if(!havePassport) {
         return(
             <Switch>
                     <Route exact path="/" component={LoginLayout} />
+                    <Route exact path="/signup" component={SignUpLayout}/>
             </Switch>
         )
     } else {

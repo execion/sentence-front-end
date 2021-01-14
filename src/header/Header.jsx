@@ -1,7 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux';
 import './css/Header.css';
+import Logined from './Logined';
+import NoLogined from './NoLogined';
 
-const Header = () => {
+const Header = ({logined, username}) => {
     return (
         <header className="header">
             <div className="logo">
@@ -9,11 +12,20 @@ const Header = () => {
             </div>
 
             <div className="nav">
-                <button className="button-signup">Sign-up</button>
-                <button className="button-login">Login</button>
+                {
+                    logined? <Logined username={username}/> : <NoLogined />
+                }
+                
             </div>
         </header>
     );
 }
 
-export default Header;
+const mapStateToProps = ({loginState}) => {
+    console.log(loginState)
+    return {
+        logined: loginState.loading,
+        username: loginState.username
+    }
+}
+export default connect(mapStateToProps, undefined)(Header);

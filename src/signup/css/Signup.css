@@ -1,0 +1,34 @@
+.container-signup {
+    display: flex;
+    justify-content: center;
+}
+.container-signup {
+    margin-top: 3rem;
+}
+
+.form-signup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.form-signup {
+    height: 12rem;
+}
+.form-signup input {
+    height: 1.5rem;
+    width: 16rem;
+    border: 1px solid rgb(63, 62, 62);
+}
+.form-signup input::placeholder {
+    text-indent: .5rem;
+}
+.form-signup button {
+    display: inline-block;
+    width: 8rem;
+    padding: .5rem 0;
+    background-color: rgb(47, 114, 202);
+    border: none;
+    color: white;
+    border-radius: .3rem;
+}

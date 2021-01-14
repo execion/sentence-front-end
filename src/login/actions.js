@@ -5,7 +5,7 @@ export const typeLogin = {
 
 export const getPassport = (user, password) => async (dispatch) => {
     const dataUser = {
-        user: user,
+        username: user,
         password: password
     }
     
@@ -22,7 +22,10 @@ export const getPassport = (user, password) => async (dispatch) => {
     dispatch(
         {
             type: typeLogin.SET_PASSPORT,
-            payload: data
+            payload: {
+                passport: data,
+                username: user
+            }
         }
     )
 }
