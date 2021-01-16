@@ -1,5 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
+
+
+const ButtonContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
+`;
 
 const User = styled.button`
     display: flex;
@@ -14,6 +21,7 @@ const User = styled.button`
     width: 8rem;
     height: 3rem;
     color:  rgba(19, 93, 212, 0.836);
+    outline: none;
 
     :hover{
         padding: 0 6rem;
@@ -26,11 +34,41 @@ const User = styled.button`
     }
 `;
 
+const Button = styled.button`
+    display: inline-block;
+    outline: none;
+    background-color: white;
+    border: none;
+`;
+
 const Logined = ({username}) => {
+    const [showMenu , setShowMenu] = useState(false);
+
+    const ChangeValue = () => {
+        setShowMenu(!showMenu);
+    }
+
+    const Logout = () => {
+        localStorage.removeItem("username");
+        localStorage.removeItem("passport");
+        window.location.reload();
+    }
+
     return (
-        <>
-            <User>{`${username}`}</User>
-        </>
+        <ButtonContainer>
+            <User onClick={() => ChangeValue()}>{`${username}`}</User>
+
+            {
+                showMenu? 
+                    <>
+                        <Button>Profile</Button>
+                        <Button onClick={() => Logout()}>Logout</Button>
+                    </>
+                    :
+                    <></>
+            }
+            
+        </ButtonContainer>
     );
 }
 

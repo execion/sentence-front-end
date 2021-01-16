@@ -1,5 +1,23 @@
 import React, {useEffect, useState} from 'react'
-import './css/AudioButton.css';
+import styled from 'styled-components';
+
+const Button = styled.button`
+    display: inline-block;
+    width: 6rem;
+    height: 2.5rem;
+    border-radius: .4rem;
+    border: .1rem solid rgba(40,40,40,1);
+    margin: 1rem 0;
+    font-size: 1.7rem;
+    font-weight: bolder;
+
+    :hover {
+    border: none;
+    background-color: rgba(40,40,40,1);
+    color: rgba(240, 240, 240, .9);
+    }
+`;
+
 const AudioButton = ({id}) => {
     const [ audioPlay, setAudioPlay ] = useState(true);
     const [ audioPlayer, setAudioPlayer ] = useState(new Audio(`http://localhost:8000/api/audio/${id}`));
@@ -29,7 +47,7 @@ const AudioButton = ({id}) => {
         }, time);
     }
     return (
-        <button className="button-game" onClick={() => audio()}>{">"}</button>
+        <Button onClick={() => audio()}>{">"}</Button>
     );
 }
 
