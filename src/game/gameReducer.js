@@ -1,7 +1,7 @@
 import { typeGame } from "./actions";
 import { v4 as uuidv4 } from "uuid";
 import { shuffle } from "shufflr";
-
+import { sendScore } from './helper';
 /* --------------------------------------------------   Reducer   -------------------------------------------------- */
 
 export const gameReducer = (state, action) => {
@@ -21,7 +21,7 @@ export const gameReducer = (state, action) => {
 
 function createSentenceList(state, action) {
     //Pasa la oración recibida a una lista en el state.
-    let tempSentence = action.payload.split(" ");
+    let tempSentence = action.payload.sentence.split(" ");
     let tempList = [];
     tempSentence = shuffle(tempSentence);
     
@@ -38,7 +38,8 @@ function createSentenceList(state, action) {
         ...state,
         loaded: true,
         question: tempList,
-        answerCorrect: action.payload
+        answerCorrect: action.payload.sentence,
+        id: action.payload.id
     };
 }
 
@@ -51,6 +52,7 @@ function questionLetters(state, payload) {
     if(questionTemp.length === 0) {
         temp = answerTemp.map( (item) => item.letter).join(" ");
         if(temp === state.answerCorrect) {
+            sendScore(state.id, true);
             return {
                 ...state,
                 question: [],
@@ -60,6 +62,7 @@ function questionLetters(state, payload) {
                 count: state.count + 1
             }
         } else {
+            sendScore(state.id, false);
             return {
                 ...state,
                 question: [],

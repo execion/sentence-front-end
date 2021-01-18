@@ -1,6 +1,7 @@
 export const defaultState = {
     loaded: false,
     index: 0,
+    id: 0,
     question: [],
     answer: [],
     answerCorrect: "",

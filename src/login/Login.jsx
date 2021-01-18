@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {getPassport} from './actions';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { Button } from '@material-ui/core';
 
 const LoginContainer = styled.div`
     display: flex;
@@ -26,17 +27,6 @@ const Input = styled.input`
     }
 `;
 
-const Button = styled.button`
-    display: inline-block;
-    background-color: rgba(40,40,40,.9);
-    border: none;
-    width: 8rem;
-    height: 2rem;
-    color: rgba(240,240,240,.9);
-    font-weight: 500;
-    border-radius: .4rem;
-`;
-
 const Login = ({getPassport}) => {
 
     const {register, handleSubmit} = useForm();
@@ -50,7 +40,7 @@ const Login = ({getPassport}) => {
             <LoginForm onSubmit={handleSubmit(onSubmit)}>
                 <Input type="text" placeholder="User" name="username" ref={register}/>
                 <Input type="password" placeholder="Password" name="password" ref={register}/>
-                <Button type="submit">Login</Button>
+                <Button variant="contained" type="submit" color="primary">Login</Button>
             </LoginForm>
         </LoginContainer>
     );

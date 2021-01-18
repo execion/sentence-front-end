@@ -2,23 +2,12 @@ import React, { useEffect, useReducer } from "react";
 import { connect } from "react-redux";
 import { typeGame } from "./actions";
 import AudioButton from "./AudioButton";
-import ButtonList from "./ButtonList";
+import ListWord from "./ListWord";
 import Counter from "./Counter";
 import { gameReducer } from "./gameReducer";
 import { defaultState } from "./state";
 import { insertSentence, stateToCounter, sentenceId } from './helper';
-import styled from "styled-components";
-
-const GroupWords = styled.div`
-    min-height: 10rem;
-    max-width: 70%;
-`;
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
+import { Box, CircularProgress, Grid } from "@material-ui/core";
 
 const Game = ({sentences}) => {
     const [state, dispatch] = useReducer(gameReducer, defaultState);
@@ -38,22 +27,36 @@ const Game = ({sentences}) => {
     if (state.loaded) {
         //Si la oración esta cargada en el state, comienza.
         return (
-            <Container>  
+            <Box display="flex" flexDirection="column" alignItems="center">
                 <Counter count={stateToCounter(state)} />
-                <AudioButton id={sentenceId(sentences, state)}/>
-
-
-                <GroupWords>
-                    <ButtonList WordList={state.answer} AlternateLetter={alternateLetter} Types={typeGame.ANSWER}/>
-                </GroupWords>
-
-                <GroupWords>
-                    <ButtonList WordList={state.question} AlternateLetter={alternateLetter} Types={typeGame.QUESTION}/>
-                </GroupWords>
-            </Container>
+                
+                <Box mb="1rem" mt="1rem">
+                    <AudioButton id={sentenceId(sentences, state)}/>
+                </Box>
+        
+                <Box minHeight={2 * 108}>
+                    <Grid
+                        container
+                        spacing={1}
+                    >
+                        <ListWord words={state.answer} AlternateLetter={alternateLetter} Types={typeGame.ANSWER}/>
+                    </Grid>
+                </Box>
+                <Grid
+                    container
+                    justify={"center"}
+                    spacing={4}
+                >
+                    <ListWord words={state.question} AlternateLetter={alternateLetter} Types={typeGame.QUESTION}/>
+                </Grid>
+            </Box>
         );
     } else {
-        return <div>Loading....</div>;
+        return(
+            <Box display="flex" justifyContent="center" mt={25}>
+                <CircularProgress size={100}/>
+            </Box>
+        );
     }
 };
 

@@ -1,3 +1,4 @@
+import { Box, CircularProgress } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Game from '../game/Game';
@@ -13,7 +14,9 @@ const GameLayout = ({init, getSentences}) => {
     return (
       <>
         <Header />
-        <p>..Loading</p>
+        <Box display="flex" justifyContent="center" mt={25}>
+          <CircularProgress size={100}/>
+        </Box>
       </>
     )
   }

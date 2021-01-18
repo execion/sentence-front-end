@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
@@ -26,29 +27,17 @@ const Input = styled.input`
     }
 `;
 
-const Button = styled.button`
-    display: inline-block;
-    width: 8rem;
-    padding: .5rem 0;
-    background-color: rgb(47, 114, 202);
-    border: none;
-    color: white;
-    border-radius: .3rem;
-`;
-
 const SignUp = () => {
     const {register, handleSubmit} = useForm();
 
     const onSubmit = async (data) => {
-        const response = await fetch("http://localhost:8000/login/register", {
+        await fetch("http://localhost:8000/login/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         })
-        const answer = await response.json();
-        console.log(answer);
     }
 
     return (
@@ -59,7 +48,7 @@ const SignUp = () => {
                     <Input type="password" name="password" placeholder="password" ref={register}/>
                     <Input type="password" name="repeatpassword" placeholder="repeat password" ref={register}/>
                     <Input type="text" name="email" placeholder="e-mail" ref={register}/>
-                    <Button>Send</Button>
+                    <Button variant="contained" color="primary" type="submit">Send</Button>
                 </Form>
             </ContainerSignUp>
         </>
