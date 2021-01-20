@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import { Box } from '@material-ui/core';
 
 const AudioButton = ({id}) => {
     const [ audioPlay, setAudioPlay ] = useState(true);
@@ -30,7 +31,9 @@ const AudioButton = ({id}) => {
         }, time);
     }
     return (
-        <PlayCircleOutlineIcon onClick={() => audio()} color="primary" style={{fontSize:70}}/>
+        <Box my="1rem">
+            <PlayCircleOutlineIcon onClick={() => audio()} color="primary" style={{fontSize:70}}/>
+        </Box>
     );
 }
 

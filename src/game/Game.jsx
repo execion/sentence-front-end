@@ -29,15 +29,13 @@ const Game = ({sentences}) => {
         return (
             <Box display="flex" flexDirection="column" alignItems="center">
                 <Counter count={stateToCounter(state)} />
-                
-                <Box my="1rem">
-                    <AudioButton id={sentenceId(sentences, state)}/>
-                </Box>
-        
-                <Box minHeight="8rem">
+                <AudioButton id={sentenceId(sentences, state)}/>
+
+                <Box minHeight="6rem" my="2rem">
                     <Grid
                         container
                         spacing={1}
+                        justify={"center"}
                     >
                         <ListWord words={state.answer} AlternateLetter={alternateLetter} Types={typeGame.ANSWER}/>
                     </Grid>
