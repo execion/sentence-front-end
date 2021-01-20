@@ -30,11 +30,11 @@ const Game = ({sentences}) => {
             <Box display="flex" flexDirection="column" alignItems="center">
                 <Counter count={stateToCounter(state)} />
                 
-                <Box mb="1rem" mt="1rem">
+                <Box my="1rem">
                     <AudioButton id={sentenceId(sentences, state)}/>
                 </Box>
         
-                <Box minHeight={2 * 108}>
+                <Box minHeight="8rem">
                     <Grid
                         container
                         spacing={1}

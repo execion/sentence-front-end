@@ -9,7 +9,7 @@ const Header = ({logined, username}) => {
         <Box bgcolor="primary.dark" height="8rem">
             <Grid container direction="row" justify="center">
                 <Grid item xs={7} md={9} lg={10}>
-                    <Box display="flex" alignItems="center" height="8rem" ml={10} fontSize={50} fontWeight="bold" color="text.primary">
+                    <Box display="flex" alignItems="center" height="8rem" ml={10} fontSize={40} fontWeight="bold" color="text.primary">
                         <p>
                             ENGSyS
                         </p>
@@ -17,7 +17,7 @@ const Header = ({logined, username}) => {
                 </Grid>
 
                 <Grid item xs={5} md={3} lg={2}>
-                    <Box display="flex" alignItems="center" height="8rem">
+                    <Box display="flex" alignItems="center" height="8rem" justifyContent="center">
                         {
                             logined? <Logined username={username}/> : <NoLogined />
                         }

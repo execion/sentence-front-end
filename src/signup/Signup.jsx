@@ -31,7 +31,7 @@ const SignUp = () => {
     const {register, handleSubmit} = useForm();
 
     const onSubmit = async (data) => {
-        await fetch("http://localhost:8000/login/register", {
+        await fetch("http://192.168.0.190:8000/login/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

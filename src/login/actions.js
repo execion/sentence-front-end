@@ -9,7 +9,7 @@ export const getPassport = (user, password) => async (dispatch) => {
         password: password
     }
     
-    const response = await fetch('http://localhost:8000/login/access', {
+    const response = await fetch('http://192.168.0.190:8000/login/access', {
         method: "POST",
         body: JSON.stringify(dataUser),
         headers: {

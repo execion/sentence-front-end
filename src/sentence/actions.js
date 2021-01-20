@@ -17,7 +17,7 @@ export const getSentences = () => async ( dispatch ) => {
         passport: localStorage.getItem("passport")
     }
     
-    const response = await fetch("http://localhost:8000/api/sentences", {
+    const response = await fetch("http://192.168.0.190:8000/api/sentences", {
         method: "POST",
         headers: {
             "Content-Type" : "application/json"

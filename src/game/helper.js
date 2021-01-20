@@ -33,7 +33,7 @@ export const sendScore = async(id, score) => {
         score: score
     }
     // eslint-disable-next-line
-    const response = await fetch("http://localhost:8000/score", {
+    const response = await fetch("http://192.168.0.190:8000/score", {
         method: "POST",
         headers: {
             "Content-Type" : "application/json"

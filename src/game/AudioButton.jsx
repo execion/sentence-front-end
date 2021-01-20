@@ -6,7 +6,7 @@ const AudioButton = ({id}) => {
     const [ audioPlayer, setAudioPlayer ] = useState(new Audio(`http://localhost:8000/api/audio/${id}`));
 
     useEffect(() => {
-        setAudioPlayer(new Audio(`http://localhost:8000/api/audio/${id}`));
+        setAudioPlayer(new Audio(`http://192.168.0.190:8000/api/audio/${id}`));
         audioPlayer.load();
         setAudioPlay(true);
     // eslint-disable-next-line
