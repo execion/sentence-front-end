@@ -34,7 +34,7 @@ const Game = ({sentences}) => {
                 <Box minHeight="6rem" my="2rem">
                     <Grid
                         container
-                        spacing={1}
+                        spacing={2}
                         justify={"center"}
                     >
                         <ListWord words={state.answer} AlternateLetter={alternateLetter} Types={typeGame.ANSWER}/>
@@ -43,7 +43,7 @@ const Game = ({sentences}) => {
                 <Grid
                     container
                     justify={"center"}
-                    spacing={4}
+                    spacing={2}
                 >
                     <ListWord words={state.question} AlternateLetter={alternateLetter} Types={typeGame.QUESTION}/>
                 </Grid>
