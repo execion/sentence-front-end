@@ -30,7 +30,7 @@ export const sentenceId = (sentence, state) => {
 export const sendScore = async(id, score) => {
     const scoreObject = {
         id: id,
-        score: score
+        correct: score
     }
     // eslint-disable-next-line
     const response = await fetch("http://192.168.0.190:8000/score", {
