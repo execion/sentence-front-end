@@ -6,7 +6,7 @@ import ListWord from "./ListWord";
 import Counter from "./Counter";
 import { gameReducer } from "./gameReducer";
 import { defaultState } from "./state";
-import { insertSentence, stateToCounter, sentenceId } from './helper';
+import { stateToCounter, sentenceId, sendScore } from './helper';
 import { Box, CircularProgress, Grid } from "@material-ui/core";
 
 const Game = ({sentences}) => {
@@ -19,10 +19,17 @@ const Game = ({sentences}) => {
         }
     );
 
+    const nextSentence = () => {
+        if(state.question.length === 0 && state.sentence.length > 0) {
+            sendScore(state.answer, state.sentence[state.index], dispatch);
+            dispatch({type: typeGame.NEXT_SENTENCES});
+        }
+    }
+
     useEffect(() => {
-        insertSentence(sentences, state, dispatch); //Carga la oración en el state
+        dispatch({type: typeGame.INSERT_SENTENCES, payload: sentences}) //Carga las oraciones en el state
         // eslint-disable-next-line
-    }, [state.index]);
+    },[sentences]);
 
     if (state.loaded) {
         //Si la oración esta cargada en el state, comienza.
@@ -40,12 +47,13 @@ const Game = ({sentences}) => {
                         <ListWord words={state.answer} AlternateLetter={alternateLetter} Types={typeGame.ANSWER}/>
                     </Grid>
                 </Box>
+
                 <Grid
                     container
                     justify={"center"}
                     spacing={2}
                 >
-                    <ListWord words={state.question} AlternateLetter={alternateLetter} Types={typeGame.QUESTION}/>
+                    <ListWord nextSentence={nextSentence} words={state.question} AlternateLetter={alternateLetter} Types={typeGame.QUESTION}/>
                 </Grid>
             </Box>
         );

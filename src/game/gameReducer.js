@@ -1,17 +1,20 @@
 import { typeGame } from "./actions";
 import { v4 as uuidv4 } from "uuid";
 import { shuffle } from "shufflr";
-import { sendScore } from './helper';
 /* --------------------------------------------------   Reducer   -------------------------------------------------- */
 
 export const gameReducer = (state, action) => {
     switch (action.type) {
         case typeGame.INSERT_SENTENCES:
             return createSentenceList(state, action);
+        case typeGame.NEXT_SENTENCES:
+            return nextSentences(state);
         case typeGame.QUESTION:
             return questionLetters(state, action.payload);
         case typeGame.ANSWER:
             return answerLetters(state, action.payload);
+        case typeGame.SET_SCORE:
+            return setScore(state, action.payload);
         default:
             return state;
     }
@@ -21,26 +24,28 @@ export const gameReducer = (state, action) => {
 
 function createSentenceList(state, action) {
     //Pasa la oración recibida a una lista en el state.
-    let tempSentence = action.payload.sentence.split(" ");
-    let tempList = [];
-    tempSentence = shuffle(tempSentence);
-    
-    for (let i of tempSentence) {
-        tempList.push({
-            id: uuidv4(),
-            letter: i,
-        });
+    if(action.payload.length > 0) {
+        let sentenceList = action.payload;
+        let tempSentence = sentenceList[state.index].sentence.split(" ");
+        let tempList = [];
+        tempSentence = shuffle(tempSentence);
+        
+        for (let i of tempSentence) {
+            tempList.push({
+                id: uuidv4(),
+                letter: i,
+            });
+        }
+        
+        return {
+            ...state,
+            loaded: true,
+            question: tempList,
+            sentence: sentenceList,
+            id: action.payload.id
+        };
     }
-    
-    tempList = shuffle(tempList);
-
-    return {
-        ...state,
-        loaded: true,
-        question: tempList,
-        answerCorrect: action.payload.sentence,
-        id: action.payload.id
-    };
+    return state;
 }
 
 function questionLetters(state, payload) {
@@ -49,30 +54,6 @@ function questionLetters(state, payload) {
     let answerTemp = state.answer.concat(temp);
     let questionTemp = state.question.filter((item) => item.id !== payload);
 
-    if(questionTemp.length === 0) {
-        temp = answerTemp.map( (item) => item.letter).join(" ");
-        if(temp === state.answerCorrect) {
-            sendScore(state.id, true);
-            return {
-                ...state,
-                question: [],
-                answer: [],
-                countCorrect: state.countCorrect + 1,
-                index: state.index + 1,
-                count: state.count + 1
-            }
-        } else {
-            sendScore(state.id, false);
-            return {
-                ...state,
-                question: [],
-                answer: [],
-                countIncorrect: state.countIncorrect + 1,
-                index: state.index + 1,
-                count: state.count + 1
-            }
-        }
-    } 
     return {
         ...state,
         question: questionTemp,
@@ -91,4 +72,40 @@ function answerLetters(state, payload) {
         answer: answerTemp,
         question: questionTemp,
     };
+}
+
+function nextSentences(state) {
+    let index = state.index + 1;
+    let tempSentence = state.sentence[index].sentence.split(" ");
+
+    let tempList = [];
+    tempSentence = shuffle(tempSentence);
+    
+    for (let i of tempSentence) {
+        tempList.push({
+            id: uuidv4(),
+            letter: i,
+        });
+    }
+    return {
+        ...state,
+        index: index,
+        question: tempList,
+        answer: []
+    }
+}
+
+function setScore(state, payload) {
+    if(payload === true) {
+        return {
+            ...state,
+            countCorrect: state.countCorrect + 1,
+            count: state.count + 1
+        }
+    }
+    return {
+        ...state,
+        countIncorrect: state.countIncorrect + 1,
+        count: state.count + 1
+    }
 }
